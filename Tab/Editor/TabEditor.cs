@@ -38,9 +38,9 @@ namespace ZTools
         {
             tabClass.Update();
             // 开始监测修改
-            EditorGUILayout.PropertyField(tabTxt);
             EditorGUI.BeginChangeCheck();
             tab = (Tab)target;
+            EditorGUILayout.PropertyField(tabTxt);
             EditorGUILayout.PropertyField(multipleChoice);
             EditorGUILayout.PropertyField(isOn);
             // 鼠标移入状态设置
