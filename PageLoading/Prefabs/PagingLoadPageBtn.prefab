@@ -250,6 +250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26b19cb008d47c146a9db62494126134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tabTxt: {fileID: 3262591914934745685}
   tabName: 
   isOn: 0
   multipleChoice: 0
@@ -257,8 +258,6 @@ MonoBehaviour:
   hoverImg: {fileID: 8005304936128688863}
   isHoverImgColor: 0
   isHoverTxtColor: 0
-  tabTxt: {fileID: 3262591914934745685}
-  isOnTabTxt: {fileID: 0}
   isOnImgActive: 1
   isOnTxtColor: 0
   isOnImgColor: 0

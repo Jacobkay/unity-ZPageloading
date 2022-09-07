@@ -28,7 +28,7 @@ namespace ZTools
         /// </summary>
         public event Action<Transform, object, int> SetPageItemEvent;
         /// <summary>
-        /// 可以监听到选择的那页
+        /// 可以监听到选择的页码
         /// </summary>
         public event Action<int> PageNumEvent;
         /// <summary>
