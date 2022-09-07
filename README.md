@@ -14,7 +14,7 @@ unity分页加载组件，可自定义展示形式，自定义展示数量，操
 3.  Inspector面板中即可看到所有显示配置项
 4.	点击运行，即可使用
 5.	内含使用demo脚本（PageLoadingDemo.cs），方便学习使用
-6.	内含Tab组件，如需了解如何使用，请查看https://gitee.com/jacobkay/ztools
+6.	内含Tab组件，如需了解如何使用，请查看https://gitee.com/jacobkay/unity-radiobox-checkbox
 
 #### 使用说明
 
