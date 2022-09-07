@@ -9,6 +9,9 @@ namespace ZTools
     [RequireComponent(typeof(Image), typeof(Button))]
     public class Tab : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
+        [Header("按钮下text")]
+        [SerializeField]
+        private Text tabTxt;
         [Header("给按钮设置标签")]
         public string tabName;
         [SerializeField]
@@ -19,14 +22,16 @@ namespace ZTools
         private bool multipleChoice = false;
         [Header("改变图片显示状态")]
         [Header("---------------鼠标移入状态设置----------------")]
-        public bool isHoverImgActive;
-        public GameObject hoverImg;
+        [SerializeField]
+        private bool isHoverImgActive;
+        [SerializeField]
+        private GameObject hoverImg;
         [Header("改变图片显示颜色")]
-        public bool isHoverImgColor;
+        [SerializeField]
+        private bool isHoverImgColor;
         [Header("改变文字显示颜色")]
-        public bool isHoverTxtColor;
-        public Text tabTxt;
-        public Text isOnTabTxt;
+        [SerializeField]
+        private bool isHoverTxtColor;
         [SerializeField]
         [Header("改变图片显示状态")]
         [Header("---------------选中时状态设置----------------")]
@@ -39,16 +44,24 @@ namespace ZTools
         private bool isOnImgColor = false;
         [Header("父级控制器，可手动配置")]
         [Header("---------------------------------------------")]
-        public TabController tabcontroller = null;
-        public Image tabImg;
-        public Image tabChangeColorImg;
-        public Image hoverImage;
-        public Color changeTxtColor;
-        public Color hoverTxtColor;
-        public Color imgColor;
-        public Color hoverImageColor;
-
-        public List<GameObject> showPanel;
+        [SerializeField]
+        private TabController tabcontroller = null;
+        [SerializeField]
+        private Image tabImg;
+        [SerializeField]
+        private Image tabChangeColorImg;
+        [SerializeField]
+        private Image hoverImage;
+        [SerializeField]
+        private Color changeTxtColor;
+        [SerializeField]
+        private Color hoverTxtColor;
+        [SerializeField]
+        private Color imgColor;
+        [SerializeField]
+        private Color hoverImageColor;
+        [SerializeField]
+        private List<GameObject> showPanel;
 
         private Button btnTab;
         public TabController tabController
@@ -61,7 +74,6 @@ namespace ZTools
             get { return tabcontroller; }
         }
         private Color origTxtColor;
-        private Color origIsOnTxtColor;
         private Color origImgColor;
         private Color origHoverImgColor;
         /// <summary>
@@ -74,7 +86,21 @@ namespace ZTools
         public event Action<Tab> TabClickFirstEffect;
         private bool isInit = false;
         private int hash;
-
+        public string text
+        {
+            get
+            {
+                if (null != tabTxt)
+                {
+                    return tabTxt.text;
+                }
+                else
+                {
+                    Debug.LogError("大佬您按钮下可没有text哦，赶快加一个吧/(ㄒoㄒ)/~~");
+                    return "大佬您按钮下可没有text哦，赶快加一个吧/(ㄒoㄒ)/~~";
+                }
+            }
+        }
         public bool IsOn
         {
             set
@@ -101,6 +127,10 @@ namespace ZTools
         {
             btnTab = this.GetComponent<Button>();
             btnTab.transition = Selectable.Transition.None;
+            if (null == tabTxt)
+            {
+                tabTxt = transform.Find("Text").GetComponent<Text>();
+            }
             hash = this.GetHashCode();
             if (!isInit)
             {
@@ -122,7 +152,7 @@ namespace ZTools
         void InitData()
         {
             isInit = true;
-            if (isHoverTxtColor)
+            if (isHoverTxtColor || isOnTxtColor)
             {
                 if (null != tabTxt)
                 {
@@ -131,17 +161,6 @@ namespace ZTools
                 else
                 {
                     Debug.LogError("tabTxt is null");
-                }
-            }
-            if (isOnTxtColor)
-            {
-                if (null != isOnTabTxt)
-                {
-                    origIsOnTxtColor = isOnTabTxt.color;
-                }
-                else
-                {
-                    Debug.LogError("isOnTabTxt is null");
                 }
             }
             if (isOnImgColor)
@@ -200,7 +219,7 @@ namespace ZTools
             }
             if (isOnTxtColor)
             {
-                isOnTabTxt.color = (value) ? changeTxtColor : origIsOnTxtColor;
+                tabTxt.color = (value) ? changeTxtColor : origTxtColor;
             }
             if (isOnImgActive)
             {

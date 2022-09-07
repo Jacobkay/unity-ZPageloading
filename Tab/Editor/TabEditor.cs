@@ -8,37 +8,37 @@ namespace ZTools
     public class TabEditor : Editor
     {
         private Tab tab;
-        private SerializedObject test;//序列化
-        private SerializedProperty isHoverImgActive, isHoverTxtColor, isHoverImgColor, isOnTabTxt, hoverImage, hoverImageColor, hoverTxtColor, hoverImg, isOnTxtColor, isOnImgActive, isOnImgColor, tabChangeColorImg, changeTxtColor, imgColor, tabTxt, tabImg, isOn, showPanel, tabName, tabcontroller, multipleChoice;//定义类型，变量a，变量b
+        private SerializedObject tabClass;//序列化
+        private SerializedProperty isHoverImgActive, isHoverTxtColor, isHoverImgColor, hoverImage, hoverImageColor, hoverTxtColor, hoverImg, isOnTxtColor, isOnImgActive, isOnImgColor, tabChangeColorImg, changeTxtColor, imgColor, tabTxt, tabImg, isOn, showPanel, tabName, tabcontroller, multipleChoice;//定义类型，变量a，变量b
         private void OnEnable()
         {
-            test = new SerializedObject(target);
-            isOnTxtColor = test.FindProperty("isOnTxtColor");
-            isOnImgActive = test.FindProperty("isOnImgActive");
-            isOnImgColor = test.FindProperty("isOnImgColor");
-            tabChangeColorImg = test.FindProperty("tabChangeColorImg");
-            changeTxtColor = test.FindProperty("changeTxtColor");
-            imgColor = test.FindProperty("imgColor");
-            isHoverImgActive = test.FindProperty("isHoverImgActive");
-            isHoverImgColor = test.FindProperty("isHoverImgColor");
-            hoverImage = test.FindProperty("hoverImage");
-            isOnTabTxt = test.FindProperty("isOnTabTxt");
-            hoverImageColor = test.FindProperty("hoverImageColor");
-            tabTxt = test.FindProperty("tabTxt");
-            tabImg = test.FindProperty("tabImg");
-            isHoverTxtColor = test.FindProperty("isHoverTxtColor");
-            hoverTxtColor = test.FindProperty("hoverTxtColor");
-            isOn = test.FindProperty("isOn");
-            showPanel = test.FindProperty("showPanel");
-            tabName = test.FindProperty("tabName");
-            hoverImg = test.FindProperty("hoverImg");
-            tabcontroller = test.FindProperty("tabcontroller");
-            multipleChoice = test.FindProperty("multipleChoice");
+            tabClass = new SerializedObject(target);
+            isOnTxtColor = tabClass.FindProperty("isOnTxtColor");
+            isOnImgActive = tabClass.FindProperty("isOnImgActive");
+            isOnImgColor = tabClass.FindProperty("isOnImgColor");
+            tabChangeColorImg = tabClass.FindProperty("tabChangeColorImg");
+            changeTxtColor = tabClass.FindProperty("changeTxtColor");
+            imgColor = tabClass.FindProperty("imgColor");
+            isHoverImgActive = tabClass.FindProperty("isHoverImgActive");
+            isHoverImgColor = tabClass.FindProperty("isHoverImgColor");
+            hoverImage = tabClass.FindProperty("hoverImage");
+            hoverImageColor = tabClass.FindProperty("hoverImageColor");
+            tabTxt = tabClass.FindProperty("tabTxt");
+            tabImg = tabClass.FindProperty("tabImg");
+            isHoverTxtColor = tabClass.FindProperty("isHoverTxtColor");
+            hoverTxtColor = tabClass.FindProperty("hoverTxtColor");
+            isOn = tabClass.FindProperty("isOn");
+            showPanel = tabClass.FindProperty("showPanel");
+            tabName = tabClass.FindProperty("tabName");
+            hoverImg = tabClass.FindProperty("hoverImg");
+            tabcontroller = tabClass.FindProperty("tabcontroller");
+            multipleChoice = tabClass.FindProperty("multipleChoice");
         }
         public override void OnInspectorGUI()
         {
-            test.Update();
+            tabClass.Update();
             // 开始监测修改
+            EditorGUILayout.PropertyField(tabTxt);
             EditorGUI.BeginChangeCheck();
             tab = (Tab)target;
             EditorGUILayout.PropertyField(multipleChoice);
@@ -52,7 +52,6 @@ namespace ZTools
             EditorGUILayout.PropertyField(isHoverTxtColor);
             if (isHoverTxtColor.boolValue)
             {
-                EditorGUILayout.PropertyField(tabTxt);
                 EditorGUILayout.PropertyField(hoverTxtColor);
             }
             EditorGUILayout.PropertyField(isHoverImgColor);
@@ -69,7 +68,6 @@ namespace ZTools
             EditorGUILayout.PropertyField(isOnTxtColor);
             if (isOnTxtColor.boolValue)
             {
-                EditorGUILayout.PropertyField(isOnTabTxt);
                 EditorGUILayout.PropertyField(changeTxtColor);
             }
             EditorGUILayout.PropertyField(isOnImgColor);
@@ -87,7 +85,7 @@ namespace ZTools
             //结束监测，判断是否有修改
             if (EditorGUI.EndChangeCheck())
             {
-                test.ApplyModifiedProperties();
+                tabClass.ApplyModifiedProperties();
             }
         }
     }
